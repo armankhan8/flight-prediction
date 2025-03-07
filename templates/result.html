@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-5 text-center">
+            <div class="mb-5">
+                <div class="mb-4 position-relative">
+                    <div class="position-absolute top-0 start-50 translate-middle-x">
+                        <div class="bg-success rounded-circle p-3" style="opacity: 0.1; width: 120px; height: 120px;"></div>
+                    </div>
+                    <i class="fas fa-check-circle fa-4x text-success position-relative"></i>
+                </div>
+                <h2 class="fw-bold mb-3 display-4">Prediction Result</h2>
+                <p class="text-muted fs-5">Estimated Flight Price</p>
+            </div>
+
+            <div class="card bg-light mb-5">
+                <div class="card-body p-4">
+                    <div class="price-display">
+                        <h3 class="text-primary fw-bold mb-2 display-3">₹{{ prediction_text }}</h3>
+                        <p class="text-muted mb-0">Indian Rupees</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-3">
+                <a href="/ind" class="btn btn-primary btn-lg position-relative overflow-hidden">
+                    <span class="position-relative z-index-1">
+                        <i class="fas fa-calculator me-2"></i> Make Another Prediction
+                    </span>
+                </a>
+                <a href="/" class="btn btn-outline-primary btn-lg position-relative overflow-hidden">
+                    <span class="position-relative z-index-1">
+                        <i class="fas fa-file-upload me-2"></i> Try Batch Prediction
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.price-display {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.price-display h3 {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>
+{% endblock %}

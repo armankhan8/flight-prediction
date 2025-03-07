@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-5">
+            <div class="text-center mb-5">
+                <div class="mb-4 position-relative">
+                    <div class="position-absolute top-0 start-50 translate-middle-x">
+                        <div class="bg-primary rounded-circle p-3" style="opacity: 0.1; width: 120px; height: 120px;"></div>
+                    </div>
+                    <i class="fas fa-plane fa-4x text-primary position-relative"></i>
+                </div>
+                <h2 class="fw-bold mb-3 display-4">Single Flight Price Prediction</h2>
+                <p class="text-muted fs-5">Enter flight details to predict the price</p>
+            </div>
+
+            <form action="/result" method="post" class="needs-validation" novalidate>
+                <div class="row g-4">
+                    <!-- Airline -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" name="Airline" id="airlineSelect" required>
+                                <option value="">Select Airline</option>
+                                <option value="Air Asia">Air Asia</option>
+                                <option value="Air India">Air India</option>
+                                <option value="GoAir">GoAir</option>
+                                <option value="IndiGo">IndiGo</option>
+                                <option value="Jet Airways">Jet Airways</option>
+                                <option value="Jet Airways Business">Jet Airways Business</option>
+                                <option value="Multiple carriers">Multiple carriers</option>
+                                <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
+                                <option value="SpiceJet">SpiceJet</option>
+                                <option value="Trujet">Trujet</option>
+                                <option value="Vistara">Vistara</option>
+                                <option value="Vistara Premium economy">Vistara Premium economy</option>
+                            </select>
+                            <label for="airlineSelect" class="fw-medium">Airline</label>
+                        </div>
+                    </div>
+
+                    <!-- Source -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" name="Source" id="sourceSelect" required>
+                                <option value="">Select Source</option>
+                                <option value="Banglore">Banglore</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Mumbai">Mumbai</option>
+                            </select>
+                            <label for="sourceSelect" class="fw-medium">Source</label>
+                        </div>
+                    </div>
+
+                    <!-- Destination -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" name="Destination" id="destinationSelect" required>
+                                <option value="">Select Destination</option>
+                                <option value="Banglore">Banglore</option>
+                                <option value="Cochin">Cochin</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="New Delhi">New Delhi</option>
+                            </select>
+                            <label for="destinationSelect" class="fw-medium">Destination</label>
+                        </div>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" name="Additional_Info" id="additionalInfoSelect" required>
+                                <option value="">Select Additional Info</option>
+                                <option value="1 Long layover">1 Long layover</option>
+                                <option value="1 Short layover">1 Short layover</option>
+                                <option value="2 Long layover">2 Long layover</option>
+                                <option value="Business class">Business class</option>
+                                <option value="Change airports">Change airports</option>
+                                <option value="In-flight meal not included">In-flight meal not included</option>
+                                <option value="No check-in baggage included">No check-in baggage included</option>
+                                <option value="Red-eye flight">Red-eye flight</option>
+                            </select>
+                            <label for="additionalInfoSelect" class="fw-medium">Additional Info</label>
+                        </div>
+                    </div>
+
+                    <!-- Stop Number -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" name="Stop_No" id="stopNoInput" min="0" max="2" required>
+                            <label for="stopNoInput" class="fw-medium">Number of Stops</label>
+                        </div>
+                    </div>
+
+                    <!-- Departure Date/Time -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="datetime-local" class="form-control" name="D_DT" id="departureDateTime" required>
+                            <label for="departureDateTime" class="fw-medium">Departure Date & Time</label>
+                        </div>
+                    </div>
+
+                    <!-- Arrival Date/Time -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="datetime-local" class="form-control" name="A_DT" id="arrivalDateTime" required>
+                            <label for="arrivalDateTime" class="fw-medium">Arrival Date & Time</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 position-relative overflow-hidden">
+                        <span class="position-relative z-index-1">
+                            <i class="fas fa-calculator me-2"></i> Predict Price
+                        </span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-5">
+                <p class="text-muted mb-4">Need to predict multiple flights?</p>
+                <a href="/" class="btn btn-outline-primary btn-lg px-5 position-relative overflow-hidden">
+                    <span class="position-relative z-index-1">
+                        <i class="fas fa-file-upload me-2"></i> Go to Batch Prediction
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Form validation
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+
+// Add animation to form elements on focus
+document.querySelectorAll('.form-control, .form-select').forEach(element => {
+    element.addEventListener('focus', function() {
+        this.parentElement.classList.add('animate__animated', 'animate__pulse');
+    });
+    
+    element.addEventListener('blur', function() {
+        this.parentElement.classList.remove('animate__animated', 'animate__pulse');
+    });
+});
+</script>
+{% endblock %}
