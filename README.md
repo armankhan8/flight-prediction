@@ -13,9 +13,7 @@ Before running this project, make sure you have the following installed:
 
 ```
 ├── app.py              # Main Flask application
-├── model.py           # Model training and prediction logic
 ├── model.pkl          # Trained model file
-├── pre.py            # Data preprocessing script
 ├── requirements.txt   # Project dependencies
 ├── static/           # Static files (CSS, JS, images)
 ├── templates/        # HTML templates
@@ -78,12 +76,3 @@ If you encounter any issues:
 2. Check if the virtual environment is activated
 3. Verify that Python 3.8 or higher is being used
 4. Ensure all required files are present in the project directory
-
-## Support
-
-For any questions or issues, please contact:
-[Your Contact Information]
-
-## License
-
-[Your License Information]
